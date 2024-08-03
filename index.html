@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Programs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        #error-message {
+            text-align: center;
+        }
+        #error-message h1 {
+            font-size: 96px;
+            margin: 0;
+        }
+        #error-message h2 {
+            font-size: 36px;
+            margin: 10px 0;
+        }
+        #error-message p {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .program {
+            display: none;
+            margin-top: 20px;
+            width: 80%;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+        }
+        .number-bar {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .number {
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="error-message">
+        <h1>404</h1>
+        <h2>Page Not Found</h2>
+        <p>The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    </div>
+
+    <!-- Program Containers -->
+    <div class="program" id="program1">
+        <h2>Program 1</h2>
+        <textarea id="program1-text" readonly></textarea>
+        <button onclick="copyToClipboard('program1-text')">Copy Program 1</button>
+    </div>
+    <div class="program" id="program2">
+        <h2>Program 2</h2>
+        <textarea id="program2-text" readonly></textarea>
+        <button onclick="copyToClipboard('program2-text')">Copy Program 2</button>
+    </div>
+    <div class="program" id="program3">
+        <h2>Program 3</h2>
+        <textarea id="program3-text" readonly></textarea>
+        <button onclick="copyToClipboard('program3-text')">Copy Program 3</button>
+    </div>
+    <div class="program" id="program4">
+        <h2>Program 4</h2>
+        <textarea id="program4-text" readonly></textarea>
+        <button onclick="copyToClipboard('program4-text')">Copy Program 4</button>
+    </div>
+    <div class="program" id="program5">
+        <h2>Program 5</h2>
+        <textarea id="program5-text" readonly></textarea>
+        <button onclick="copyToClipboard('program5-text')">Copy Program 5</button>
+    </div>
+    <div class="program" id="program6">
+        <h2>Program 6</h2>
+        <textarea id="program6-text" readonly></textarea>
+        <button onclick="copyToClipboard('program6-text')">Copy Program 6</button>
+    </div>
+    <div class="program" id="program7">
+        <h2>Program 7</h2>
+        <textarea id="program7-text" readonly></textarea>
+        <button onclick="copyToClipboard('program7-text')">Copy Program 7</button>
+    </div>
+    <div class="program" id="program8">
+        <h2>Program 8</h2>
+        <textarea id="program8-text" readonly></textarea>
+        <button onclick="copyToClipboard('program8-text')">Copy Program 8</button>
+    </div>
+    <div class="program" id="program9">
+        <h2>Program 9</h2>
+        <textarea id="program9-text" readonly></textarea>
+        <button onclick="copyToClipboard('program9-text')">Copy Program 9</button>
+    </div>
+    <div class="program" id="program10">
+        <h2>Program 10</h2>
+        <textarea id="program10-text" readonly></textarea>
+        <button onclick="copyToClipboard('program10-text')">Copy Program 10</button>
+    </div>
+    <div class="program" id="program11">
+        <h2>Program 11</h2>
+        <textarea id="program11-text" readonly></textarea>
+        <button onclick="copyToClipboard('program11-text')">Copy Program 11</button>
+    </div>
+    <div class="program" id="program12">
+        <h2>Program 12</h2>
+        <textarea id="program12-text" readonly></textarea>
+        <button onclick="copyToClipboard('program12-text')">Copy Program 12</button>
+    </div>
+
+    <!-- Number Bar -->
+    <div class="number-bar">
+        <div class="number" onclick="showProgram('program1', 'program1.txt')">1</div>
+        <div class="number" onclick="showProgram('program2', 'program2.txt')">2</div>
+        <div class="number" onclick="showProgram('program3', 'program3.txt')">3</div>
+        <div class="number" onclick="showProgram('program4', 'program4.txt')">4</div>
+        <div class="number" onclick="showProgram('program5', 'program5.txt')">5</div>
+        <div class="number" onclick="showProgram('program6', 'program6.txt')">6</div>
+        <div class="number" onclick="showProgram('program7', 'program7.txt')">7</div>
+        <div class="number" onclick="showProgram('program8', 'program8.txt')">8</div>
+        <div class="number" onclick="showProgram('program9', 'program9.txt')">9</div>
+        <div class="number" onclick="showProgram('program10', 'program10.txt')">10</div>
+        <div class="number" onclick="showProgram('program11', 'program11.txt')">11</div>
+        <div class="number" onclick="showProgram('program12', 'program12.txt')">12</div>
+    </div>
+
+    <script>
+        function copyToClipboard(id) {
+            var textarea = document.getElementById(id);
+            textarea.select();
+            textarea.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            alert("Copied the text: " + textarea.value);
+        }
+
+        function showProgram(programId, fileName) {
+            document.getElementById('error-message').style.display = 'none';
+            var programDiv = document.getElementById(programId);
+            var textarea = document.getElementById(programId + '-text');
+
+            // Fetch program content
+            fetch(fileName)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    textarea.value = data;
+                    // Hide all programs
+                    var allPrograms = document.querySelectorAll('.program');
+                    allPrograms.forEach(prog => prog.style.display = 'none');
+                    // Show selected program
+                    programDiv.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error loading program:', error);
+                    alert('Error loading program: ' + error.message);
+                });
+        }
+    </script>
+</body>
+</html>
